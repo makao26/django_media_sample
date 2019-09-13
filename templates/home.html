@@ -1,0 +1,14 @@
+<!-- templates/home.html-->
+<!--base.htmlを継承-->
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<!--ユーザを承認済みかどうかを調べる ユーザが正しいユーザ名とパスワードを入力した時 True-->
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  <p><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}
