@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'works.apps.WorksConfig',
+    'accounts.apps.AccountsConfig', # 追加
 ]
 
 MIDDLEWARE = [
@@ -128,3 +130,6 @@ STATIC_URL = '/static/'
 
 # メール情報のコンソール出力
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# カスタムユーザモデル
+AUTH_USER_MODEL = 'accounts.CustomUser'
