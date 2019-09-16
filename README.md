@@ -1,1 +1,9 @@
-# django_user_sample
+# django_media_sample
+Djangoのポートフォリオです。
+
+・機能一覧
+(1)ユーザ認証、登録
+(2)画像アップロード機能
+(3)記事一覧
+(4)ページネーション
+
