@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #'works.apps.WorksConfig',
     'accounts.apps.AccountsConfig', # 追加
+    'media_app'
 ]
 
 MIDDLEWARE = [
@@ -121,7 +122,7 @@ LANGUAGE_CODE = 'ja-jp'
 TIME_ZONE = 'Asia/Tokyo'
 USE_I18N = True
 USE_L10N = True
-USE_TZ = False
+USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
@@ -133,3 +134,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # カスタムユーザモデル
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+#mediaフォルダ設定
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
