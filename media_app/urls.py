@@ -14,6 +14,7 @@ urlpatterns = [
      #path('',views.top,name='top'),
      path('up_load',views.up_load,name='up_load'),
      path('view', views.view, name='view'),
+     path('add', views.add, name='add'),
      #path('notice', views.notice, name='notice'),
      #path('create_acount', views.create_acount, name='create_acount'),
      #path('login_acount', views.login_acount, name='login_acount'),

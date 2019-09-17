@@ -12,10 +12,11 @@ from .models import Document
 #from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
-
+from accounts.models import CustomUser
 
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
         #fields = ('user','description', 'photo', )
+        #fields = ('title','description', 'photo', )
         fields = ('author','title','description', 'photo', )
