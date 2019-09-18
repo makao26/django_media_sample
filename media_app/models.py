@@ -9,3 +9,7 @@ class Document(models.Model):
     description = models.TextField(max_length=1000,blank=True)
     photo = models.ImageField(upload_to='documents/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
+
+class Friend(models.Model):
+    owner = models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name ='friend_owner' )
+    friend = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
