@@ -8,21 +8,38 @@ from accounts.models import CustomUser
 from .models import Friend
 from django.contrib import messages
 from django.db.models import Q
+from django.views import generic
+from django.urls import reverse_lazy
 
-def up_load(request):
-    if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            #form.save(commit=false)
-            print("debug01")
-            form.author = request.user
-            form.save()
-            return redirect('home')
-            #return HttpResponseRedirect('')#レダイレクト先はhome画面へ遷移
-    else:
-        print("debug02")
-        form = DocumentForm()
-    return render(request, 'media_app/up_load.html', {'form': form,'author': request.user})
+class up_load(generic.CreateView):
+    # アップロード
+    def get_form_kwargs(self, *args, **kwargs):
+        form_kwargs = super().get_form_kwargs(*args, **kwargs)
+        form_kwargs['initial'] = {'author': self.request.user}  # フォームに初期値を設定する。
+        return form_kwargs
+
+    model = Document
+    form_class = DocumentForm
+    success_url = reverse_lazy('home')
+    template_name = 'media_app/up_load.html'
+
+# def up_load(request):
+#     #POSTauthorが空の時はできない
+#     #form = DocumentForm(request.POST, request.FILES,{'author': request.user})
+#     if request.method == 'POST':
+#         form = DocumentForm(request.POST, request.FILES,{'author': request.user})
+#         if form.is_valid():
+#             #form.save(commit=false)
+#             print("debug01")
+#             form.author = request.user
+#             print(form.author)
+#             form.save()
+#             return redirect('home')
+#             #return HttpResponseRedirect('')#レダイレクト先はhome画面へ遷移
+#     else:
+#         print("debug02")
+#         form = DocumentForm()
+#     return render(request, 'media_app/up_load.html', {'form': form,'author': request.user})
 
 def view(request):
     obj = Document.objects.all()

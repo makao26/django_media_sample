@@ -12,8 +12,9 @@ from . import views
 
 urlpatterns = [
      #path('',views.top,name='top'),
-     path('up_load',views.up_load,name='up_load'),
+     #path('up_load',views.up_load,name='up_load'),
      path('view', views.view, name='view'),
+     path('up_load', views.up_load.as_view(), name='up_load'),
      path('add', views.add, name='add'),
      #path('notice', views.notice, name='notice'),
      #path('create_acount', views.create_acount, name='create_acount'),
