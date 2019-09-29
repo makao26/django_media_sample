@@ -13,6 +13,7 @@
         <td><img src="{{ item.photo.url }}" width="100" height="100"/></td>
         <td>{{ item.uploaded_at }}</td>
         <td>"{{ item.author }}"<a href="{% url 'add' %}?name={{item.author.username}}">add friend</a></tb>
+        <td><a href="{% url 'article_detail_view' item.pk %}">続きを読む</a></td>
       </tr>
      {% endfor %}
      <div class="link">

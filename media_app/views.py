@@ -11,6 +11,10 @@ from django.db.models import Q
 from django.views import generic
 from django.urls import reverse_lazy
 
+'''
+CreateViewとは、名前の通りデータの生成を行うビューです。DBでいうとINSERTを行います。
+
+'''
 class up_load(generic.CreateView):
     # アップロード
     def get_form_kwargs(self, *args, **kwargs):
@@ -20,8 +24,11 @@ class up_load(generic.CreateView):
 
     model = Document
     form_class = DocumentForm
-    success_url = reverse_lazy('home')
     template_name = 'media_app/up_load.html'
+    success_url = reverse_lazy('home')
+
+
+
 
 # def up_load(request):
 #     #POSTauthorが空の時はできない
@@ -40,6 +47,10 @@ class up_load(generic.CreateView):
 #         print("debug02")
 #         form = DocumentForm()
 #     return render(request, 'media_app/up_load.html', {'form': form,'author': request.user})
+
+class ArticleDetailView(generic.DetailView):
+    model = Document
+    template_name = 'media_app/article_detail_view.html'
 
 def view(request):
     obj = Document.objects.all()
