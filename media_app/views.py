@@ -52,6 +52,12 @@ class ArticleDetailView(generic.DetailView):
     model = Document
     template_name = 'media_app/article_detail_view.html'
 
+class ArticleListView(generic.ListView):
+    model = Document
+    template_name = 'media_app/article_list_view.html'
+    context_object_name = "document_list"
+    paginate_by = 5
+
 def view(request):
     obj = Document.objects.all()
     paginator = Paginator(obj, 5) # 1ページに10件表示
@@ -62,6 +68,11 @@ def view(request):
         'objs': objs,
     }
     return render(request,'media_app/view.html',params)
+
+class ArticleDeleteView(generic.DeleteView):
+    model = Document
+    template_name = 'media_app/article_detail_view.html'
+    success_url = reverse_lazy('home')
 
 # Friendの追加処理
 def add(request):

@@ -8,7 +8,8 @@
   Hi {{ user.username }}!
   <p><a href="{% url 'logout' %}">logout</a></p>
   <p><a href="{% url 'up_load' %}">up load</a></p>
-  <p><a href="{% url 'view' %}">view</a></p>
+  <!-- <p><a href="{% url 'view' %}">view</a></p> -->
+  <p><a href="{% url 'article_list_view' %}">article_list_view</a></p>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a>
