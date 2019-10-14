@@ -8,6 +8,7 @@ from accounts.models import CustomUser
 from .models import Friend
 from django.contrib import messages
 from django.db.models import Q
+from django.views import View
 from django.views import generic
 from django.urls import reverse_lazy
 
@@ -27,26 +28,16 @@ class up_load(generic.CreateView):
     template_name = 'media_app/up_load.html'
     success_url = reverse_lazy('home')
 
+class ArticleUpdateView(generic.UpdateView):
+    model = Document
+    form_class = DocumentForm
+    template_name = 'media_app/article_update.html'
+    success_url = reverse_lazy('home')
 
-
-
-# def up_load(request):
-#     #POSTauthorが空の時はできない
-#     #form = DocumentForm(request.POST, request.FILES,{'author': request.user})
-#     if request.method == 'POST':
-#         form = DocumentForm(request.POST, request.FILES,{'author': request.user})
-#         if form.is_valid():
-#             #form.save(commit=false)
-#             print("debug01")
-#             form.author = request.user
-#             print(form.author)
-#             form.save()
-#             return redirect('home')
-#             #return HttpResponseRedirect('')#レダイレクト先はhome画面へ遷移
-#     else:
-#         print("debug02")
-#         form = DocumentForm()
-#     return render(request, 'media_app/up_load.html', {'form': form,'author': request.user})
+class ArticleDeleteView(generic.DeleteView):
+    model = Document
+    template_name = 'media_app/article_delete.html'
+    success_url = reverse_lazy('home')
 
 class ArticleDetailView(generic.DetailView):
     model = Document
@@ -57,6 +48,37 @@ class ArticleListView(generic.ListView):
     template_name = 'media_app/article_list_view.html'
     context_object_name = "document_list"
     paginate_by = 5
+
+# delete model
+# def delete(request, num):
+#     doc = Document.objects.get(id=num)
+#     if (request.method == 'POST'):
+#         doc.delete()
+#         return redirect(to='home')
+#     params = {
+#         'title': 'delete',
+#         'id':num,
+#         'obj': doc,
+#     }
+#     return render(request, 'media_app/article_delete.html', params)
+#
+class DeleteView(View):
+    def __init__(self):
+        self.params = {
+            'title': 'delete',
+            'id':None,
+            'obj': None,
+        }
+
+    def get(self,request,*args, **kwargs):
+        return render(request, 'media_app/article_delete.html', self.params)
+
+    def post(self, request, *args, **kwargs):
+        self.params['id'] = request.GET['num']
+        self.params['obj'] = Document.objects.get(id=self.params['id'])
+        self.params['obj'].delete()
+        return redirect(to='home')
+
 
 def view(request):
     obj = Document.objects.all()

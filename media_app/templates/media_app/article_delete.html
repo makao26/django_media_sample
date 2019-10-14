@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+    <html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{title}}</title>
+    </head>
+    <body>
+      <form method="post">
+        {% csrf_token %}
+        <p>削除します。よろしいですか？</p>
+        <input class="btn btn-danger" type="submit" value="削除する">
+      </form>
+    </body>
+</html>
