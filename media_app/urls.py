@@ -21,4 +21,5 @@ urlpatterns = [
      path('article_delete',views.DeleteView.as_view(),name = 'article_delete'),
      re_path(r'^article_detail_view/(?P<pk>\d+)/$',views.ArticleDetailView.as_view(),name = 'article_detail_view'),
      path('add', views.add, name='add'),
+     path('mypage',views.MyPage.as_view(),name="mypage"),
 ]

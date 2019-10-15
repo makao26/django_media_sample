@@ -49,6 +49,15 @@ class ArticleListView(generic.ListView):
     context_object_name = "document_list"
     paginate_by = 5
 
+class MyPage(generic.ListView):
+    model = Document
+    template_name = 'media_app/article_list_view.html'
+    context_object_name = "document_list"
+    paginate_by = 5
+
+    def get_queryset(self):
+        return Document.objects.filter(author=self.request.user)
+
 # delete model
 # def delete(request, num):
 #     doc = Document.objects.get(id=num)

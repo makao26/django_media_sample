@@ -6,12 +6,13 @@
 <!--ユーザを承認済みかどうかを調べる ユーザが正しいユーザ名とパスワードを入力した時 True-->
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">logout</a></p>
-  <p><a href="{% url 'up_load' %}">up load</a></p>
-  <!-- <p><a href="{% url 'view' %}">view</a></p> -->
-  <p><a href="{% url 'article_list_view' %}">article_list_view</a></p>
+  <p><a href="{% url 'logout' %}">ログアウト</a></p>
+  <p><a href="{% url 'up_load' %}">記事投稿</a></p>
+  <p><a href="{% url 'article_list_view' %}">記事一覧表示</a></p>
+  <p><a href="{% url 'mypage' %}">マイページ</a></p>
 {% else %}
   <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a>
+  <a href="{% url 'login' %}">ログイン</a>
+  <p><a href="{% url 'article_list_view' %}">記事一覧表示</a></p>
 {% endif %}
 {% endblock %}
