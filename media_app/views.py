@@ -16,7 +16,7 @@ from django.urls import reverse_lazy
 CreateViewとは、名前の通りデータの生成を行うビューです。DBでいうとINSERTを行います。
 
 '''
-class up_load(generic.CreateView):
+class ArticleCreateView(generic.CreateView):
     # アップロード
     def get_form_kwargs(self, *args, **kwargs):
         form_kwargs = super().get_form_kwargs(*args, **kwargs)
@@ -25,7 +25,7 @@ class up_load(generic.CreateView):
 
     model = Document
     form_class = DocumentForm
-    template_name = 'media_app/up_load.html'
+    template_name = 'media_app/article_create.html'
     success_url = reverse_lazy('home')
 
 class ArticleUpdateView(generic.UpdateView):
@@ -34,10 +34,10 @@ class ArticleUpdateView(generic.UpdateView):
     template_name = 'media_app/article_update.html'
     success_url = reverse_lazy('home')
 
-class ArticleDeleteView(generic.DeleteView):
-    model = Document
-    template_name = 'media_app/article_delete.html'
-    success_url = reverse_lazy('home')
+# class ArticleDeleteView(generic.DeleteView):
+#     model = Document
+#     template_name = 'media_app/article_delete.html'
+#     success_url = reverse_lazy('home')
 
 class ArticleDetailView(generic.DetailView):
     model = Document
@@ -51,26 +51,13 @@ class ArticleListView(generic.ListView):
 
 class MyPage(generic.ListView):
     model = Document
-    template_name = 'media_app/article_list_view.html'
+    template_name = 'media_app/mypage.html'
     context_object_name = "document_list"
     paginate_by = 5
 
     def get_queryset(self):
         return Document.objects.filter(author=self.request.user)
 
-# delete model
-# def delete(request, num):
-#     doc = Document.objects.get(id=num)
-#     if (request.method == 'POST'):
-#         doc.delete()
-#         return redirect(to='home')
-#     params = {
-#         'title': 'delete',
-#         'id':num,
-#         'obj': doc,
-#     }
-#     return render(request, 'media_app/article_delete.html', params)
-#
 class DeleteView(View):
     def __init__(self):
         self.params = {
@@ -89,16 +76,16 @@ class DeleteView(View):
         return redirect(to='home')
 
 
-def view(request):
-    obj = Document.objects.all()
-    paginator = Paginator(obj, 5) # 1ページに10件表示
-    p = request.GET.get('p') # URLのパラメータから現在のページ番号を取得
-    objs = paginator.get_page(p) # 指定のページのArticleを取得
-    params = {
-        'title': 'view',
-        'objs': objs,
-    }
-    return render(request,'media_app/view.html',params)
+# def view(request):
+#     obj = Document.objects.all()
+#     paginator = Paginator(obj, 5) # 1ページに10件表示
+#     p = request.GET.get('p') # URLのパラメータから現在のページ番号を取得
+#     objs = paginator.get_page(p) # 指定のページのArticleを取得
+#     params = {
+#         'title': 'view',
+#         'objs': objs,
+#     }
+#     return render(request,'media_app/view.html',params)
 
 class ArticleDeleteView(generic.DeleteView):
     model = Document

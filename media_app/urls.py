@@ -12,14 +12,11 @@ from django.urls import re_path
 #from django.contrib.auth.views import logout
 
 urlpatterns = [
-     #path('',views.top,name='top'),
-     #path('up_load',views.up_load,name='up_load'),
-     path('view', views.view, name='view'),
-     path('up_load', views.up_load.as_view(), name='up_load'),
+     path('artical_create', views.ArticleCreateView.as_view(), name='article_create'),
      re_path(r'^article_update/(?P<pk>\d+)/$', views.ArticleUpdateView.as_view(), name="article_update"),
      path('article_list_view', views.ArticleListView.as_view(), name='article_list_view'),
-     path('article_delete',views.DeleteView.as_view(),name = 'article_delete'),
      re_path(r'^article_detail_view/(?P<pk>\d+)/$',views.ArticleDetailView.as_view(),name = 'article_detail_view'),
+     path('article_delete',views.DeleteView.as_view(),name = 'article_delete'),
      path('add', views.add, name='add'),
      path('mypage',views.MyPage.as_view(),name="mypage"),
 ]
