@@ -11,10 +11,10 @@ from django.db.models import Q
 from django.views import View
 from django.views import generic
 from django.urls import reverse_lazy
+from .forms import SearchForm
 
 '''
 CreateViewとは、名前の通りデータの生成を行うビューです。DBでいうとINSERTを行います。
-
 '''
 class ArticleCreateView(generic.CreateView):
     # アップロード
@@ -48,6 +48,30 @@ class ArticleListView(generic.ListView):
     template_name = 'media_app/article_list_view.html'
     context_object_name = "document_list"
     paginate_by = 5
+
+    def get_queryset(self):
+    # デフォルトは全件取得
+        results = Document.objects.all()
+    # GETのURLクエリパラメータを取得する
+    # 該当のクエリパラメータが存在しない場合は、[]が返ってくる
+    # q_kinds = self.request.GET.getlist('kind')
+        #default_data = {'title': None,}
+        #form = SearchForm(initial=default_data)
+        #form = SearchForm()
+        #q_title = self.request.POST.get('title')
+        q_title = self.request.GET.get('title')
+        print(q_title)
+    # 品種での絞込は、Kind.pkとして存在してる値のみ対象とする
+    # "a"とかを指定するとValueErrorになるため
+    # if len(q_kinds) != 0:
+    #     kinds = [x for x in q_kinds if x in ["1", "2"]]
+    #     results = results.filter(kind__in=kinds)
+
+    # 名前での絞り込み
+        if q_title is not None:
+             results = results.filter(title__contains=q_title)
+
+        return results
 
 class MyPage(generic.ListView):
     model = Document

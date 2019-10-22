@@ -26,3 +26,15 @@ class DocumentForm(forms.ModelForm):
         # widgets = {
         #     'author': forms.HiddenInput()
         # }
+
+class SearchForm(forms.Form):
+    title = forms.CharField(
+        # initial='',
+        label='title',
+        required = False, # 必須ではない
+    )
+    # text = forms.CharField(
+    #     initial='',
+    #     label='内容',
+    #     required=False,  # 必須ではない
+    # )
