@@ -30,6 +30,7 @@
       <tr>
         <td>{{ item.title }}</td>
         <td>{{ item.uploaded_at }}</td>
+        <td><a href="{% url 'article_detail_view' item.pk %}">詳細</a></td>
         {% if user.is_authenticated %}
           <td>"{{ item.author.username}}"<a href="{% url 'add' %}?name={{item.author.username}}">友達追加</a></td>
         {% else %}
