@@ -19,4 +19,5 @@ urlpatterns = [
      path('article_delete',views.DeleteView.as_view(),name = 'article_delete'),
      path('add', views.add, name='add'),
      path('mypage',views.MyPage.as_view(),name="mypage"),
+     path('friend_list', views.FriendList.as_view(), name='friend_list'),
 ]

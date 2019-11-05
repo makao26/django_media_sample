@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    <html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{title}}</title>
+    </head>
+    <header id="sample">
+      <h3>友人一覧</h3>
+      <nav>
+        <ul>
+          <li><a href="/">ホーム</a></li>
+        </ul>
+      </nav>
+    </header>
+    <body>
+      <h1>{{title}}</h1>
+
+      <table border="1">
+      <tr>
+        <th>友人名</th>
+      </tr>
+      {% for item in friend_list %}
+      <tr>
+        <td>{{ item.friend.username }}</td>
+      </tr>
+      {% endfor %}
+      </table>
+    <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+    </div>
+    </body>
+</html>

@@ -146,3 +146,12 @@ def add(request):
     # メッセージを設定
     messages.success(request, add_user.username + ' を追加しました！ groupページに移動して、追加したFriendをメンバーに設定して下さい。')
     return redirect(to='view')
+
+class FriendList(generic.ListView):
+    model = Document
+    template_name = 'media_app/friend_list.html'
+    context_object_name = "friend_list"
+    paginate_by = 5
+
+    def get_queryset(self):
+        return Friend.objects.filter(owner=self.request.user)
